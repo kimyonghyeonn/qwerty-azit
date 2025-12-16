@@ -1,4 +1,4 @@
-FrontEnd 실행 방법 (깃허브 CICD 테스트)
+FrontEnd 실행 방법 ( 깃허브 CICD 테스트 )
 
 1. node 버전은 22.9.0, nvm 사용시 22.9.0 버전 받고 nvm use 22.9.0 실행
 2. npm run dev 로 로컬서버 실행, 포트 : 5173
