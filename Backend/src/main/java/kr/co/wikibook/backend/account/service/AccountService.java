@@ -2,6 +2,8 @@ package kr.co.wikibook.backend.account.service;
 
 import kr.co.wikibook.backend.member.model.Members;
 
+import java.util.HashMap;
+
 public interface AccountService {
 
     int join(Members members);
@@ -29,4 +31,5 @@ public interface AccountService {
     int updateResetPw(Members members);
 
     int updatePwWithResetFlag(Members members);
+
 }
