@@ -25,4 +25,6 @@ public class Members {
     private boolean resetPw;
     private boolean infoAgree; // 개인정보 처리방침 동의
     private LocalDateTime created; // 생성 일시
+    private String oauthProvider;
+    private String oauthId;
 }

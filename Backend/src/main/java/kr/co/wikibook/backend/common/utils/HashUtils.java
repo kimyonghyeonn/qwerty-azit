@@ -1,5 +1,7 @@
 package kr.co.wikibook.backend.common.utils;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -29,7 +31,7 @@ public class HashUtils {
     public static String generateHash(String value, String salt) {
         try {
 
-            MessageDigest md = MessageDigest.getInstance("# Add Your Info Here => Ex) SHA-256, MD5, SHA-384, ETC...");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
 
             // 원본 값과 솔트 합치기
             String passwordSalted = value + salt;

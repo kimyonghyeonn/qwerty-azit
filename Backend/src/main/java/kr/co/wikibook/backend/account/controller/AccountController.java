@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.wikibook.backend.account.service.AccountService;
 import kr.co.wikibook.backend.account.service.BaseAccountService;
+import kr.co.wikibook.backend.account.service.KaKaoLoginService;
 import kr.co.wikibook.backend.block.service.BlockService;
 import kr.co.wikibook.backend.common.etc.AccountsConstant;
 import kr.co.wikibook.backend.common.helper.TokenAccountHelper;
@@ -18,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.MalformedURLException;
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -26,6 +29,9 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+
+    @Autowired
+    KaKaoLoginService kaKaoLoginService;
 
     @Autowired
     MembersService membersService;
@@ -264,7 +270,25 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/kakaologin/{code}")
+    public ResponseEntity<String> kakaoLogin(HttpServletRequest req, HttpServletResponse res, @PathVariable String code) throws Exception {
 
+        String kakaoToken = kaKaoLoginService.requestToken(code);
 
+        String userId = kaKaoLoginService.requestUser(kakaoToken);
+        if(userId==null){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("로그인 및 회원가입에 실패했습니다.");
+        }
+        // 엑세스 토큰 발급
+        String accessToken = TokenUtils.createToken(AccountsConstant.ACCESS_TOKEN_NAME, AccountsConstant.MEMBER_ID_NAME, userId, AccountsConstant.ACCESS_TOKEN_EXP_MINUTES);
+
+        // 리프레시 토큰 발급
+        String refreshToken = TokenUtils.createToken(AccountsConstant.REFRESH_TOKEN_NAME, AccountsConstant.MEMBER_ID_NAME, userId, AccountsConstant.REFRESH_TOKEN_EXP_MINUTES);
+
+        // 리프레시 토큰 쿠키 저장(유효시간을 0으로 입력해 웹 브라우저 종료시 삭제)
+        HttpUtils.setCookie(res, AccountsConstant.REFRESH_TOKEN_NAME, refreshToken,0);
+
+        return ResponseEntity.ok().body(accessToken);
+    }
 
 }
