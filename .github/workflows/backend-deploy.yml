@@ -55,8 +55,14 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-            # 최신 jar를 app.jar로 고정
-            latest=$(ls -t /srv/app/backend/build/libs/*.jar | head -n 1)
+
+            # 실행 가능한 jar 선택 (plain.jar, app.jar 제외)
+            latest=$(ls -t /srv/app/backend/build/libs/*.jar \
+              | grep -vE '(plain|app)\.jar$' \
+              | head -n 1)
+
+            echo "Selected jar: $latest"
             cp "$latest" /srv/app/backend/build/libs/app.jar
+
             sudo systemctl restart backend
             sudo systemctl status backend --no-pager | head -n 30
