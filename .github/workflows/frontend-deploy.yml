@@ -1,0 +1,48 @@
+name: FrontEnd Deploy
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "FrontEnd/**"
+      - ".github/workflows/frontend-deploy.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22.9.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.9.0"
+          cache: "npm"
+          cache-dependency-path: "FrontEnd/package-lock.json"
+
+      - name: Install & Build
+        working-directory: FrontEnd
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload dist to EC2 (rsync)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            mkdir -p /var/www/frontend
+
+      - name: Copy dist
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "FrontEnd/dist/*"
+          target: "/var/www/frontend"
+          strip_components: 2
