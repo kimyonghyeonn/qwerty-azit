@@ -26,6 +26,16 @@ public class KaKaoLoginService {
     @Autowired
     AccountService accountService;
 
+    @Value("${kakao.client-id}")
+    private String clientId;
+
+    @Value("${kakao.client-secret}")
+    private String clientSecret;
+
+    @Value("${kakao.redirect-uri}")
+    private String redirectUri;
+
+
     public String requestToken(String code) throws MalformedURLException {
         String access_Token = "";
         String refresh_Token = "";
@@ -49,15 +59,28 @@ public class KaKaoLoginService {
             sb.append("grant_type=authorization_code");
 
             // 1번 파라미터 client_id
-            sb.append("&client_id=0665d3f6aefd487f0c3e9bba86b68e27");
+//             sb.append("&client_id=0665d3f6aefd487f0c3e9bba86b68e27");
+//
+//             // 2번 파라미터 redirect_uri
+//             sb.append("&redirect_uri=http://localhost:5173/kakaoLogin");
+//
+//             // 3번 파라미터 code
+//             sb.append("&code=" + code);
+//
+//             sb.append("&client_secret=mSLgD3pLaNemoIlo53QJhDRv0O9IjWNu");
 
-            // 2번 파라미터 redirect_uri
-            sb.append("&redirect_uri=http://localhost:5173/kakaoLogin");
+            // ✅ (변경) client_id 하드코딩 제거
+            sb.append("&client_id=").append(URLEncoder.encode(client_id, StandardCharsets.UTF_8));
 
-            // 3번 파라미터 code
-            sb.append("&code=" + code);
+            // ✅ (변경) redirect_uri 하드코딩 제거 + 인코딩
+            sb.append("&redirect_uri=").append(URLEncoder.encode(redirectUri, StandardCharsets.UTF_8));
 
-            sb.append("&client_secret=mSLgD3pLaNemoIlo53QJhDRv0O9IjWNu");
+            // ✅ (변경) code 인코딩 (안 하면 가끔 깨짐)
+            sb.append("&code=").append(URLEncoder.encode(code, StandardCharsets.UTF_8));
+
+            // ✅ (변경) client_secret 하드코딩 제거
+            sb.append("&client_secret=").append(URLEncoder.encode(clientSecret, StandardCharsets.UTF_8));
+
 
             bw.write(sb.toString());
             bw.flush();// 실제 요청을 보내는 부분
@@ -65,7 +88,13 @@ public class KaKaoLoginService {
             int responseCode = conn.getResponseCode();
 
             // 요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            // BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+              // ✅ (최소 변경 권장) 실패 시에도 메시지 읽게끔
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            (responseCode >= 200 && responseCode < 300) ? conn.getInputStream() : conn.getErrorStream()
+                    ));
+
             String line = "";
             String result = "";
 
@@ -86,6 +115,11 @@ public class KaKaoLoginService {
         }
         return access_Token;
     }
+
+
+
+
+
         public String requestUser(String accessToken) throws Exception {
             String strUrl = "https://kapi.kakao.com/v2/user/me"; // request를 보낼 주소
 
