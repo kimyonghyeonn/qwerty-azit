@@ -73,7 +73,7 @@ public class KaKaoLoginService {
 //             sb.append("&client_secret=mSLgD3pLaNemoIlo53QJhDRv0O9IjWNu");
 
             // ✅ (변경) client_id 하드코딩 제거
-            sb.append("&client_id=").append(URLEncoder.encode(client_id, StandardCharsets.UTF_8));
+            sb.append("&client_id=").append(URLEncoder.encode(clientId, StandardCharsets.UTF_8));
 
             // ✅ (변경) redirect_uri 하드코딩 제거 + 인코딩
             sb.append("&redirect_uri=").append(URLEncoder.encode(redirectUri, StandardCharsets.UTF_8));
