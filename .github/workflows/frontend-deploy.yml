@@ -36,6 +36,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             mkdir -p /var/www/frontend
+            rm -rf /var/www/frontend/*
 
       - name: Copy dist
         uses: appleboy/scp-action@v0.1.7
