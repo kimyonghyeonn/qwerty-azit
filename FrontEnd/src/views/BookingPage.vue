@@ -8,7 +8,7 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-
+    <!-- 주석 테스트 -->
     <ion-content id="main-content" :fullscreen="true">
       <div v-if="login">
         <BookingForm :room="selectedRoom" @callBack="Back" />
@@ -119,7 +119,7 @@ watch(
   (roomId) => {
     login.value = !!roomId;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 async function getAllRooms() {
