@@ -1,5 +1,7 @@
 FRONTEND CI/CD
 
+frontend-deploy.yml 스크립트의 전반적 실행과정을 요약정리한 파일입니다.
+
 main 브랜치에서 FRONTEND 소스의 push 발생시 Github Actions 가 작동한다.
 .github/workflows 하위의 frontend-deploy.yml 에 따라 CICD 가 실행된다.
 
