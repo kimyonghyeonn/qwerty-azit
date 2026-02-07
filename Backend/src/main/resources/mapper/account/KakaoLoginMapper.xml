@@ -6,12 +6,12 @@
     <select id="getKaKaoUserLoginId" resultType="string">
         SELECT
             ID
-        FROM MEMBERS
+        FROM members
         WHERE OAUTH_PROVIDER = 'kakao' AND OAUTH_ID = #{kakaoId}
     </select>
 
     <insert id="joinWithKakao" parameterType="kr.co.wikibook.backend.member.model.Members">
-        INSERT INTO MEMBERS (
+        INSERT INTO members (
             NAME,
             LOGIN_ID,
             LOGIN_PW,
