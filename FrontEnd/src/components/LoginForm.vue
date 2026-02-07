@@ -64,11 +64,13 @@
         expand="block"
         @click="kakaoLogin"
       >
-        <div style="display: flex; align-items: center; gap: 4px">
+        <!-- <div style="display: flex; align-items: center; gap: 4px"> -->
+        <div class="kakao-wrap">
           <img
-            src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+            src="/public/kakao-talk.png"
             width="222"
             alt="카카오 로그인 버튼"
+            class="kakao-btn"
           />
         </div>
       </ion-button>
@@ -217,6 +219,18 @@ function kakaoLogin() {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
+  cursor: pointer;
+}
+.kakao-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.kakao-btn {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
   cursor: pointer;
 }
 </style>
