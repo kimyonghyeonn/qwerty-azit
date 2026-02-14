@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <a id="readme-top"></a>
 
 <!-- BADGES -->
@@ -154,7 +155,7 @@
 # 🏗 System Architecture
 
 <a href="https://qwerty-azit.com/">
-<img src="images/Architecture.png" alt="band animation" width="900">
+<img src="images/architecture.png" alt="band animation" width="900">
 </a>
 
 ---
