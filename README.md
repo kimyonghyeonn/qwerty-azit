@@ -204,8 +204,6 @@ GitHub Actions를 사용하여 자동 배포 환경을 구축하였습니다.
 
 ## ⚙️ CI/CD Flow
 
-## ⚙️ CI/CD Flow
-
 ```bash
 ┌──────────────────────────────┐
 │   GitHub (main branch) Push  │
