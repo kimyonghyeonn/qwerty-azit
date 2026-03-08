@@ -20,6 +20,7 @@
 <p>
   <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=openjdk&logoColor=white">
   <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+    <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
   <img src="https://img.shields.io/badge/Tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
 </p>
 
@@ -112,7 +113,7 @@
 
 ## FrontEnd
 
-- Vue.js 3
+- Vue.js (Vue3, Ionic Framework)
 - Vite
 - JavaScript
 - Axios
@@ -213,7 +214,7 @@ GitHub Actions를 사용하여 자동 배포 환경을 구축하였습니다.
                │
                ▼
 ┌──────────────────────────────┐
-│   GitHub Actions 실행         │
+│      GitHub Actions 실행      │
 └──────────────┬───────────────┘
                │
        ┌───────┴────────┐
