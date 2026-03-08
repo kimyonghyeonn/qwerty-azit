@@ -48,8 +48,8 @@ jobs:
 
       - name: Upload bundle to S3
         run: |
-          aws s3 cp frontend-deploy/frontend-deploy.zip \
-            s3://qwerty-azit-codedeploy-artifacts/frontend/frontend-deploy-${{ github.sha }}.zip
+          aws s3 cp ../frontend-deploy/frontend-deploy.zip \
+          s3://qwerty-azit-codedeploy-artifacts/frontend/frontend-deploy-${{ github.sha }}.zip
 
       - name: Create CodeDeploy deployment
         run: |
