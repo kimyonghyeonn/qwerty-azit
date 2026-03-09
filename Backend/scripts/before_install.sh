@@ -1,4 +1,5 @@
-#!/bin/bash 배포 전 디렉토리 생성 => 기존 jar 백업
+#!/bin/bash 
+#배포 전 디렉토리 생성 => 기존 jar 백업
 set -e
 
 echo "Preparing deployment directory..."

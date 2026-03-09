@@ -1,4 +1,5 @@
-#!/bin/bash 배포 전 기존 서버 중지
+#!/bin/bash 
+#배포 전 기존 서버 중지
 set -e
 
 echo "Stopping backend service..."
