@@ -29,7 +29,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "/api/account/join",
                         "/api/room/allRooms",                  // ✅ 방 목록 조회 허용
                         "/api/reservation/room/**",
-                        "/api/kakaologin/**");
+                        "/api/kakaologin/**",
+                        "/api/health");
         // ✅ 모든 API 요청을 로그로 기록
         registry.addInterceptor(userLogInterceptor)
                 .addPathPatterns("/api/**");
