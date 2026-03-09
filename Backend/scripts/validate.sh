@@ -6,6 +6,6 @@ echo "Validating backend service..."
 
 sleep 15
 
-curl -f http://localhost:8080/actuator/health
+curl -f http://localhost:8080/api/room/allRooms
 
 echo "Backend deployment successful"
