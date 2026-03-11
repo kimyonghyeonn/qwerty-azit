@@ -51,7 +51,7 @@ public class UserLogInterceptor implements HandlerInterceptor {
                 return "NO_TOKEN";
             }
 
-            // ② 토큰이 존재하나 유효하지 않음
+            // ② 토큰이 존재하나 유효하지 않음  
             if (!TokenUtils.isValid(token)) {
                 return "INVALID_TOKEN";
             }
